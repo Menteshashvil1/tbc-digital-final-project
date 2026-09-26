@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ge.tbc.testautomation.database.mappers.CurrencyConversionMapper">
+
+    <resultMap id="currencyConversionMap" type="CurrencyConversion">
+        <id property="id" column="id"/>
+        <result property="scenarioName" column="scenario_name"/>
+        <result property="sellCurrency" column="sell_currency"/>
+        <result property="buyCurrency" column="buy_currency"/>
+        <result property="amount" column="amount"/>
+        <result property="sellSymbol" column="sell_symbol"/>
+        <result property="active" column="active"/>
+    </resultMap>
+
+    <sql id="columns">
+        id, scenario_name, sell_currency, buy_currency, amount, sell_symbol, active
+    </sql>
+
+    <select id="findActive" resultMap="currencyConversionMap">
+        SELECT <include refid="columns"/>
+        FROM currency_conversion
+        WHERE active = TRUE
+        ORDER BY id
+    </select>
+
+    <select id="findById" resultMap="currencyConversionMap">
+        SELECT <include refid="columns"/>
+        FROM currency_conversion
+        WHERE id = #{id}
+    </select>
+
+    <select id="countActive" resultType="int">
+        SELECT COUNT(*)
+        FROM currency_conversion
+        WHERE active = TRUE
+    </select>
+</mapper>
