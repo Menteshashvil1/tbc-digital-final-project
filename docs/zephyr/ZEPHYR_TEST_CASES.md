@@ -4,7 +4,8 @@ Project key: `TBC` · Folder: `/TBC Digital/Final Project 2`
 
 Every automated test carries its Zephyr key at the start of its TestNG description, for example
 `@Test(description = "TBC-T2 | Switch language and complete the consumer loan journey in the selected locale")`.
-The same keys are used below and in two ASCII CSV exports for *Zephyr Scale -> Import -> CSV* (delimiter `,`):
+The same keys are used below and in [zephyr-test-cases.xml](zephyr-test-cases.xml) for *Zephyr Scale -> Import ->
+Zephyr (XML)*, and in two ASCII CSV exports for *Zephyr Scale -> Import -> CSV* (delimiter `,`):
 [zephyr-test-cases.csv](zephyr-test-cases.csv) with one row per step (rows with an empty Name continue the test
 case above) and [zephyr-test-cases-plain.csv](zephyr-test-cases-plain.csv) with one row per test case and the
 steps in the *Test Script Plain Text* field.
