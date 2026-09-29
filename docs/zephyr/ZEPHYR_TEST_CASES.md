@@ -35,7 +35,7 @@ through *Zephyr Scale → Import → CSV* (one row per step, test case fields fi
 |---|---|---|
 | 1 | Open `https://tbcbank.ge/en` | Home page loads, the cookie consent banner is shown |
 | 2 | Check the banner | Title is "Cookie Consent", a description is present, three actions are offered (Accept All, Customize, Reject All) |
-| 3 | Click **Reject All** | Banner disappears and the choice is stored in the browser |
+| 3 | Click **Reject All** | Banner disappears and cookie `tbc-ge-cookie-consent-v1` stores `result = reject-all` (it did not exist before the choice) |
 | 4 | Reload the page | Banner stays hidden |
 | 5 | Open `/en/loans/consumer-loan` | Page opens and the banner is still hidden |
 

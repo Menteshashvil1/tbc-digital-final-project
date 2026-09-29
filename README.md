@@ -82,7 +82,7 @@ pom.xml, testng.xml, testng-api.xml, testng-ui.xml
 
 | Zephyr | Test | What it proves |
 |---|---|---|
-| TBC-T1 | `CookieConsentTest` | Reject All hides the banner, the choice is stored, the banner stays away after reload and on another page |
+| TBC-T1 | `CookieConsentTest` | Reject All hides the banner, the `tbc-ge-cookie-consent-v1` cookie stores `reject-all`, the banner stays away after reload and on another page |
 | TBC-T2 | `LocalizationTest` (en, ka) | Switch language from the other locale, go through the mega menu to Consumer Loan and on to its Terms page, all localized |
 | TBC-T3 | `CurrencyConversionDataDrivenTest` (5 DB rows) | For every active row: choose currency, type amount, buy amount = amount x quoted rate, URL describes the conversion |
 | TBC-T4 | `CurrencyNetworkTest` | Choosing EUR fires `GET getExchangeRate?Iso1=EUR&Iso2=GEL`; request, status, body and resulting UI are all checked |
@@ -94,7 +94,7 @@ pom.xml, testng.xml, testng-api.xml, testng-ui.xml
 | TBC-T10 | `SiteContentApiTest` | Negative: unknown page id returns 404 with an `ApiError` body |
 | TBC-T11 | `ExchangeRateApiTest` | Rate list is sane, direct rate equals the list, rates are the same in both locales |
 
-UI scenarios: T1-T7 (seven, T2-T7 go beyond navigation). API: T8-T11 (one negative).
+UI scenarios: T1-T7 (seven; T1-T5 and T7 go beyond navigation or static content). API: T8-T11 (one negative).
 
 ## 9.1 Framework architecture
 

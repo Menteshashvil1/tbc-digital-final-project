@@ -2,14 +2,13 @@ package ge.tbc.testautomation.tests.ui;
 
 import ge.tbc.testautomation.constants.PageSlugs;
 import ge.tbc.testautomation.constants.SiteLocale;
+import ge.tbc.testautomation.constants.TestConstants;
 import ge.tbc.testautomation.steps.CookieConsentSteps;
 import ge.tbc.testautomation.steps.NavigationSteps;
 import ge.tbc.testautomation.tests.BaseUiTest;
 import ge.tbc.testautomation.utils.LocalizationData;
 import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 @Feature("Cookie consent")
 public class CookieConsentTest extends BaseUiTest {
@@ -26,13 +25,13 @@ public class CookieConsentTest extends BaseUiTest {
         CookieConsentSteps cookieSteps = new CookieConsentSteps(page());
 
         navigationSteps.openPage(SiteLocale.EN, PageSlugs.HOME);
-        List<String> cookiesBeforeChoice = cookieSteps.cookieNames();
 
         cookieSteps
                 .bannerShouldOfferChoices(english.get("cookie.title"))
+                .consentShouldNotBeStored()
                 .rejectAll()
                 .bannerShouldBeHidden()
-                .consentShouldBeStored(cookiesBeforeChoice)
+                .consentShouldBeStored(TestConstants.CONSENT_REJECT_ALL)
                 .reload()
                 .bannerShouldBeHidden();
 

@@ -1,7 +1,7 @@
 ﻿"Key","Name","Objective","Precondition","Folder","Status","Priority","Labels","Test Data","Step","Expected Result"
 "TBC-T1","Rejecting cookies hides the consent banner and the choice survives reload and navigation","A visitor who rejects optional cookies is not asked again on the next page load or page.","Fresh browser context (no tbcbank.ge cookies or local storage).","/TBC Digital/Final Project 2","Approved","High","ui","Locale en, banner title Cookie Consent.","Open https://tbcbank.ge/en","Home page loads, the cookie consent banner is shown"
 "","","","","","","","","","Check the banner","Title is ""Cookie Consent"", a description is present, three actions are offered (Accept All, Customize, Reject All)"
-"","","","","","","","","","Click Reject All","Banner disappears and the choice is stored in the browser"
+"","","","","","","","","","Click Reject All","Banner disappears and cookie tbc-ge-cookie-consent-v1 stores result = reject-all (it did not exist before the choice)"
 "","","","","","","","","","Reload the page","Banner stays hidden"
 "","","","","","","","","","Open /en/loans/consumer-loan","Page opens and the banner is still hidden"
 "TBC-T2","Switch language and complete the consumer loan journey in the selected locale","The same journey works in Georgian and English after the visitor switches the language.","Fresh browser context, cookie banner dismissed.","/TBC Digital/Final Project 2","Approved","High","localization","(src/main/resources/testdata/localization/{en,ka}.properties):","Open the home page in the *other* locale","Home page loads"

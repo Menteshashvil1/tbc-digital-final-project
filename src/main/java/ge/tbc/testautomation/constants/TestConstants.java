@@ -19,6 +19,9 @@ public final class TestConstants {
     public static final String RATE_DESCRIPTION_PATTERN = "1 %s = %s %s";
     public static final double AMOUNT_TOLERANCE = 0.01;
 
+    public static final String CONSENT_COOKIE = "tbc-ge-cookie-consent-v1";
+    public static final String CONSENT_REJECT_ALL = "reject-all";
+
     public static final String HTTP_GET = "GET";
     public static final int MAX_BREADCRUMBS = 5;
     public static final int MIN_PUBLISHED_PAGES = 50;

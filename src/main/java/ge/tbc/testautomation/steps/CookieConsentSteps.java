@@ -1,11 +1,16 @@
 package ge.tbc.testautomation.steps;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.Cookie;
+import ge.tbc.testautomation.constants.TestConstants;
 import ge.tbc.testautomation.pages.HomePage;
+import ge.tbc.testautomation.utils.JsonMapper;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 
-import java.util.List;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -29,15 +34,15 @@ public class CookieConsentSteps {
         return this;
     }
 
-    @Step("Reject all cookies")
-    public CookieConsentSteps rejectAll() {
-        homePage.cookieBanner.rejectAll();
+    @Step("No consent choice should be stored yet")
+    public CookieConsentSteps consentShouldNotBeStored() {
+        Assert.assertTrue(consentCookie() == null, "Fresh context should not have a consent cookie");
         return this;
     }
 
-    @Step("Accept all cookies")
-    public CookieConsentSteps acceptAll() {
-        homePage.cookieBanner.acceptAll();
+    @Step("Reject all cookies")
+    public CookieConsentSteps rejectAll() {
+        homePage.cookieBanner.rejectAll();
         return this;
     }
 
@@ -54,22 +59,19 @@ public class CookieConsentSteps {
         return this;
     }
 
-    @Step("A consent choice should be stored for the site")
-    public CookieConsentSteps consentShouldBeStored(List<String> cookiesBefore) {
-        List<String> cookiesAfter = cookieNames();
-        Assert.assertTrue(cookiesAfter.size() > cookiesBefore.size() || storedConsent(),
-                "Rejecting cookies should persist the choice, cookies were " + cookiesAfter);
+    @Step("Consent cookie should store the {expectedResult} choice")
+    public CookieConsentSteps consentShouldBeStored(String expectedResult) {
+        Cookie cookie = consentCookie();
+        Assert.assertNotNull(cookie, "Choosing an option should store " + TestConstants.CONSENT_COOKIE);
+        JsonNode consent = JsonMapper.fromJson(URLDecoder.decode(cookie.value, StandardCharsets.UTF_8), JsonNode.class);
+        Assert.assertEquals(consent.path("result").asText(), expectedResult, "Stored consent choice");
         return this;
     }
 
-    public List<String> cookieNames() {
+    private Cookie consentCookie() {
         return page.context().cookies().stream()
-                .map(cookie -> cookie.name)
-                .toList();
-    }
-
-    private boolean storedConsent() {
-        Object stored = page.evaluate("() => Object.keys(localStorage).filter(k => /cookie|consent/i.test(k)).length");
-        return stored instanceof Number number && number.intValue() > 0;
+                .filter(cookie -> TestConstants.CONSENT_COOKIE.equals(cookie.name))
+                .findFirst()
+                .orElse(null);
     }
 }
