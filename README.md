@@ -74,7 +74,6 @@ src/
                       CurrencyNetworkTest, CurrencyCalculatorTest, MegaMenuNavigationTest,
                       ConsumerLoanApiUiConsistencyTest
     api/              SiteContentApiTest, ExchangeRateApiTest
-docs/zephyr/          ZEPHYR_TEST_CASES.md, zephyr-test-cases.csv
 pom.xml, testng.xml, testng-api.xml, testng-ui.xml
 ```
 
@@ -254,10 +253,8 @@ event or a web-first assertion (`assertThat(...).hasText/hasURL/hasValue/isVisib
 
 ## Zephyr Scale traceability
 
-All scenarios are documented in [docs/zephyr/ZEPHYR_TEST_CASES.md](docs/zephyr/ZEPHYR_TEST_CASES.md) with
-preconditions, numbered steps, expected results and test data, and exported as
-[docs/zephyr/zephyr-test-cases.csv](docs/zephyr/zephyr-test-cases.csv) for Zephyr Scale's CSV import.
-Every automated test starts its description with the Zephyr key:
+All scenarios are documented in Zephyr Scale with preconditions, numbered steps, expected results and
+test data. Every automated test starts its description with the Zephyr key:
 
 ```java
 @Test(description = "TBC-T4 | Selecting a currency requests its rate from the exchange API and renders it")
